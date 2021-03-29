@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "orthogonal-rotation"
-version = "0.0.5"
+name = "orthogonal_rotation"
+version = "0.0.6"
