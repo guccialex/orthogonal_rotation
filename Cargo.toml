@@ -1,11 +1,12 @@
 [package]
 name = "orthogonal-rotation"
-version = "0.1.0"
-authors = ["guccialex <alex.gusain@gmail.com>"]
+version = "0.0.5"
+authors = ["guccialex <alex.gusain2@gmail.com>"]
 edition = "2018"
+license = "MIT"
+description = "Functions for rotating the points on a square"
+repository = "https://github.com/guccialex/orthogonal_rotation"
+readme = "README.md"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-
-poloto = "*"

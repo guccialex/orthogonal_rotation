@@ -2,7 +2,10 @@
 use std::f32::consts::PI;
 
 
-use ortho_rotation::ortho_rotate_point;
+use ortho_rotation::ortho_rotate_point_at_origin;
+use ortho_rotation::ortho_rotate_point_at_point;
+use ortho_rotation::ortho_rotate_i8_point;
+use ortho_rotation::ortho_rotate_i8_point_at_point;
 
 
 fn main() {
@@ -29,17 +32,12 @@ fn main() {
             
             squarevec.push(counter);
             
-            let posx = x - 4;
-            let posy = y - 4;
             
-            let amounttorotate = 0.0486;
-            let newpos = ortho_rotate_point( (posx as f32, posy as f32) , amounttorotate);
+            let amounttorotate = 0.5;
+            let newpos = ortho_rotate_i8_point_at_point( (x, y) , (4,4), amounttorotate);
             
-            let newposx = newpos.0.round() + 4.0;
-            let newposy = newpos.1.round() + 4.0;
-            
-            let vecx = newposx as usize;
-            let vecy = newposy as usize;
+            let vecx = newpos.0 as usize;
+            let vecy = newpos.1 as usize;
             
             newsquare[vecx][vecy] = counter;
             
@@ -97,9 +95,49 @@ fn print_2d_vector(vec: Vec<Vec<u32>>){
 
 mod ortho_rotation{
 
+
+    //turn the point into 
+    pub fn ortho_rotate_i8_point(point: (i8,i8), torotate: f32 ) -> (i8,i8){
+
+        let floatpoint = (point.0 as f32, point.1 as f32);
+
+        let rotatedfloatpoint = ortho_rotate_point_at_origin(floatpoint, torotate);
+
+        let rotatedi8point = (rotatedfloatpoint.0.round() as i8, rotatedfloatpoint.1.round() as i8);
+
+
+        return rotatedi8point;
+    }
+
+
+    pub fn ortho_rotate_i8_point_at_point(point: (i8,i8), origin: (i8,i8), torotate: f32 ) -> (i8,i8){
+
+        let pointprime = (point.0 - origin.0, point.1 - origin.1);
+
+        let rotatedpoint = ortho_rotate_i8_point(pointprime, torotate);
+
+        let rotatedpointprime = (rotatedpoint.0 + origin.0, rotatedpoint.1 + origin.1);
+
+        return rotatedpointprime;
+    }
+
+
+    //rotate a point with another point as its origin
+    pub fn ortho_rotate_point_at_point( point: (f32,f32), originpoint: (f32,f32), torotate: f32) -> (f32,f32){
+
+
+        //move the point so that the origin is the originpoint
+        let pointprime = (point.0 - originpoint.0, point.1 - originpoint.1);
+
+        let pointprime2 = ortho_rotate_point_at_origin(point, torotate);
+
+        let pointprime3 = (pointprime2.0 + originpoint.0, pointprime2.1 + originpoint.1);
+
+        return pointprime3;
+    }
     
     //rotate this point by this amount and return it
-    pub fn ortho_rotate_point( point: (f32,f32), torotate: f32) -> (f32,f32){
+    pub fn ortho_rotate_point_at_origin( point: (f32,f32), torotate: f32) -> (f32,f32){
     
         if point.0 == point.1  && point.0 == 0.0{
             return (0.0,0.0) ;
@@ -120,16 +158,16 @@ mod ortho_rotation{
                 //add the amount this is already rotated to the amount to rotate
                 let torotate = torotate + (numrotation as f32 * 0.25) + sectioncurrotation;
     
+
+                
                 //how many blocks (full 90 degree rotations) to apply to the newposprime2
                 let blockstorotate = (torotate / 0.25).floor() as i8;
 
-
-    
                 //how much the section will contribute to the total rotation
                 let sectiontorotate = torotate % 0.25;
+
     
-    
-                //bottom right corner
+                //point at bottom right corner
                 let newposprime = (sidelength/2.0, -sidelength/2.0);
     
                 //bottom right corner plus how much of a rotation is needed for this section * sidelength
