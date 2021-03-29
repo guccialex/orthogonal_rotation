@@ -1,5 +1,5 @@
 [package]
-name = "orthogonal_rotation"
+name = "orthogonal-rotation"
 version = "0.0.6"
 authors = ["guccialex <alex.gusain2@gmail.com>"]
 edition = "2018"
