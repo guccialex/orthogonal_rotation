@@ -4,11 +4,12 @@
 rotates a point "orthogonally" around the origin
 
 
-which I can't think of a good defintion for what I mean by "orthogonally"
-but right now the best way to describe it is to show how it affects a set of points
+which I can't think of a good defintion for what I mean by "orthogonally".
+But right now the best way to describe it is to show how it affects a set of points
 
 
 An array of points
+
 (the position in the array represents its cartesian coordinates)
 
 > 100  101  102  103  104  105  106  107  108 <br/>
@@ -23,6 +24,7 @@ An array of points
 
 
 rotated with value 140 representing the center, with the value 0.25
+
 it rotates the array 90 degrees counterclockwise
 
 > 108  117  126  135  144  153  162  171  180 <br/>
@@ -38,6 +40,7 @@ it rotates the array 90 degrees counterclockwise
 
 
 Or rotated with 140 as the center with the value 0.125
+
 it rotates the array so the diagonals become the x and y axis lines of the axis clockwise of them
 
 > 104  105  106  107  108  117  126  135  144 <br/>
@@ -52,6 +55,7 @@ it rotates the array so the diagonals become the x and y axis lines of the axis 
 
 
 Or at odder angles like 0.0287
+
 which shifts each point 2 units clockwise while maintaining the same ( x + y instead of sqrt(x^2 + y^2) ) distance from the origin
 
 > 102  103  104  105  106  107  108  117  126 <br/>
@@ -67,6 +71,7 @@ which shifts each point 2 units clockwise while maintaining the same ( x + y ins
 
 
 I made this for my chess game so that each of the 64 squares can be rotated an amount
+
 and each square if rotated the same amount, will be mapped to a square that none of the other squares are mapped to
 
 
