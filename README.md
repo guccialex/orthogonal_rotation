@@ -41,7 +41,8 @@ it rotates the array 90 degrees counterclockwise
 
 Or rotated with 140 as the center with the value 0.125
 
-it rotates the array so the diagonals become the x and y axis lines of the axis clockwise of them
+it rotates the array so the diagonals become the x and y axis lines of the axis clockwise of them (the list of points 100, 110, 120 that 
+used to go through the top left to bottom right diagonal now go left to right)
 
 > 104  105  106  107  108  117  126  135  144 <br/>
 > 103  113  114  115  116  125  134  143  153 <br/>
