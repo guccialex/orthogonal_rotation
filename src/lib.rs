@@ -68,12 +68,12 @@ pub fn ortho_rotate_i8_point(point: (i8,i8), torotate: f32 ) -> (i8,i8){
 
 pub fn ortho_rotate_i8_point_at_point(point: (i8,i8), origin: (i8,i8), torotate: f32 ) -> (i8,i8){
     
-    let floatpoint = i8_pos_to_float_pos(point);
-    let floatorigin = i8_pos_to_float_pos(origin);
+    let floatpoint = i8_pos_center_to_float_pos(point);
+    let floatorigin = i8_pos_center_to_float_pos(origin);
     
     let rotatedpoint = ortho_rotate_point_at_point(floatpoint, floatorigin, torotate);
     
-    let rotatedpointprime = float_pos_to_i8_pos(rotatedpoint);
+    let rotatedpointprime = float_center_pos_to_i8_pos(rotatedpoint);
 
     return rotatedpointprime;
 }
@@ -88,7 +88,7 @@ pub fn ortho_rotate_i8_point_at_bot_left_of_point(point: (i8,i8), origin: (i8,i8
     
     let rotatedpoint = ortho_rotate_point_at_point(floatpoint, floatorigin, torotate);
     
-    let rotatedpointprime = float_pos_to_i8_pos(rotatedpoint);
+    let rotatedpointprime = float_center_pos_to_i8_pos(rotatedpoint);
 
     return rotatedpointprime;
 }
@@ -216,7 +216,13 @@ fn i8_pos_center_to_float_pos( i8pos: (i8,i8) ) -> (f32,f32){
 }
 
 
-fn float_pos_to_i8_pos( floatpos: (f32,f32) ) -> (i8,i8){
+fn float_center_pos_to_i8_pos( floatpos: (f32,f32) ) -> (i8,i8){
 
     return ( (floatpos.0).round() as i8, (floatpos.1).round() as i8 ) ;
+}
+
+
+fn float_bot_left_pos_to_i8_pos( floatpos: (f32,f32) ) -> (i8,i8){
+
+    return ( (floatpos.0 - 0.5).round() as i8, (floatpos.1 - 0.5).round() as i8 ) ;
 }
